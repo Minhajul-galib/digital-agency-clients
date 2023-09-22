@@ -10,20 +10,20 @@ const app = express()
 const fileUpload = require('express-fileupload');
 const port = process.env.PORT || 5000;
 
-let ThisAdmin =false;
 let requesterEmail;
 
-const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+// const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount)
+// });
 
 app.use(cors());
 app.use(express.json());
 app.use(fileUpload());
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.cs9gj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+// const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.cs9gj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const uri = 'mongodb+srv://DagencyBD:SqOdjb21LaLMD5y2@cluster0.cs9gj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -39,7 +39,6 @@ async function verifyToken(req, res, next) {
              
             if (getEmail == decodedUser.email) {
                 // console.log(decodedUser.email);
-                ThisAdmin = true;
                 requesterEmail = decodedUser.email
                 console.log(requesterEmail);
             }
